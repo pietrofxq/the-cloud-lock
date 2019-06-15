@@ -8,6 +8,11 @@ import Logs from './Logs';
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding-bottom: 50px;
+  }
 `
 
 const DoorContainer = styled.div`
@@ -17,6 +22,10 @@ const DoorContainer = styled.div`
   overflow-x: auto;
   padding-bottom: 20px;
   margin-right: 32px;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `
 
 const Doors = ({ doors, loadDoors }) => {

@@ -5,7 +5,11 @@ import { TableRow, TableCell, makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 500px;
+  width: 480px;
+
+  @media(max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 const useStyles = makeStyles({

@@ -3,17 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.14",
-    "@types/node": "12.0.8",
-    "@types/react": "16.8.19",
-    "@types/react-dom": "16.8.4",
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/icons": "^4.2.0",
+    "@types/react-select": "^2.0.19",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "axios": "^0.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-select": "^3.0.4",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.1",
     "typescript": "3.5.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npx concurrently \"react-scripts start\" \"yarn run start:server\" ",
+    "start:server": "json-server ./src/db.json --port 4000",
+    "run:prettier": "npx prettier \"./src/**/*.{js,jsx,ts,tsx}\" --write",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -32,5 +42,29 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.14",
+    "@types/json-server": "^0.14.0",
+    "@types/node": "12.0.8",
+    "@types/prettier": "^1.16.4",
+    "@types/react": "16.8.19",
+    "@types/react-dom": "16.8.4",
+    "@types/react-redux": "^7.1.0",
+    "@types/react-router-dom": "^4.3.3",
+    "@types/styled-components": "^4.1.16",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "concurrently": "^4.1.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "json-server": "^0.15.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
   }
 }

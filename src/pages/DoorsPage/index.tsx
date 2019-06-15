@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Door from './Door'
+import Door from './Door/Door'
 import styled from 'styled-components'
 import { loadDoors, selectDoors } from '../../store/reducers/doors'
 import { connect } from 'react-redux'

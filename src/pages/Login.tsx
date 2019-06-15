@@ -6,7 +6,6 @@ import CustomInput from '../components/CustomInput'
 
 const Login = ({ user, loginError, login, setUser }) => {
   const [username, setUsername] = useState('')
-  console.log('user', user)
   const auth = window.localStorage.getItem('UserAuth')
   if (auth) {
     try {
@@ -19,7 +18,6 @@ const Login = ({ user, loginError, login, setUser }) => {
   if (user || auth) {
     return <Redirect to="/" />
   }
-  console.log(user, auth)
   return (
     <div>
       <h1>Login</h1>

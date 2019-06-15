@@ -50,8 +50,8 @@ const Logs = ({ logs }) => {
           </>
         )}
         renderRows={() => {
-          return logs.map(log => (
-            <Log log={log} />
+          return logs.map((log, idx) => (
+            <Log log={log} key={idx} />
           ))
         }}
       />

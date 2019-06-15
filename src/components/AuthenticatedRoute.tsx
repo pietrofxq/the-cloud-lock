@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { selectCurrentUser } from '../store/reducers/auth'
 
 const AuthenticatedRoute = ({ user, component: Component, ...routeProps }) => {
-  console.log('user auth route', user)
   return (
     <Route
       {...routeProps}

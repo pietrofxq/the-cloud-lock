@@ -40,7 +40,6 @@ const App: React.FC = () => {
             <Route
               path="/permissions"
               render={({ match }) => {
-                console.log(match)
                 return (
                   <>
                     <AuthenticatedRoute path={`${match.path}/`} exact component={Permissions} />

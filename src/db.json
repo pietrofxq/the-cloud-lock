@@ -28,6 +28,11 @@
       "id": "1",
       "name": "Front",
       "open": true
+    },
+    {
+      "name": "forbidden",
+      "doors": [],
+      "id": "m-Cb5dw"
     }
   ]
 }

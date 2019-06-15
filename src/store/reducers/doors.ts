@@ -19,9 +19,9 @@ const initialState: State = {
 }
 
 const LOAD_DOORS = 'clay/doors/LOAD_DOORS'
-const ADD_DOOR = 'clay/doors/ADD_DOOR'
+const CREATE_DOOR = 'clay/doors/CREATE_DOOR'
 const CLOSE_DOOR = 'clay/doors/CLOSE_DOOR'
-const OPEN_DOOR = 'clay/doors/OPEN_DOOR'
+const OPEN_DOOR_REQUEST = 'clay/doors/OPEN_DOOR_REQUEST'
 const OPEN_DOOR_SUCCESS = 'clay/doors/OPEN_DOOR_SUCCESS'
 const OPEN_DOOR_FAILURE = 'clay/doors/OPEN_DOOR_FAILURE'
 
@@ -29,6 +29,8 @@ const CREATE_SUCCESS_LOG = 'clay/logs/CREATE_SUCCESS_LOG'
 const CREATE_FAILURE_LOG = 'clay/logs/CREATE_FAILURE_LOG'
 
 const removeDoorFromLoading = (list, id) => list.filter(x => x !== id)
+
+const updateElementById = (el, newEl) => (el.id === newEl.id ? newEl : el)
 
 export const selectDoors = ({ doorsReducer }) => {
   const doors = doorsReducer.doors.map(door => ({
@@ -57,7 +59,7 @@ const createFailureLog = (door, user) => ({
 })
 
 const setDoor = (door: Door) => ({
-  type: ADD_DOOR,
+  type: CREATE_DOOR,
   door,
 })
 
@@ -67,7 +69,7 @@ const loadDoorsSuccess = (doors: Door[]) => ({
 })
 
 const openDoorRequest = (door: Door) => ({
-  type: OPEN_DOOR,
+  type: OPEN_DOOR_REQUEST,
   door,
 })
 
@@ -97,7 +99,7 @@ export const tryToOpenDoor = (door: Door, user: User) => {
           dispatch(createSuccessLog(door, user))
         }, 500)
       })
-      .catch(() => {
+      .catch((err) => {
         setTimeout(() => {
           dispatch(openDoorFailure(door))
           dispatch(createFailureLog(door, user))
@@ -132,27 +134,31 @@ export const loadDoors = () => {
 
 const doorsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_DOOR:
+    case CREATE_DOOR:
       return { ...state, doors: [...state.doors, action.door] }
     case LOAD_DOORS:
       return { ...state, doors: action.doors }
-    case OPEN_DOOR: {
+    case OPEN_DOOR_REQUEST: {
+      const door = {...action.door, failedToOpen: false}
       return {
         ...state,
+        doors: state.doors.map(el => updateElementById(el, door)),
         doorsLoading: [...state.doorsLoading, action.door.id],
       }
     }
     case OPEN_DOOR_SUCCESS: {
-      const door = { ...action.door, open: true }
+      const door = { ...action.door, open: true, failedToOpen: false }
       return {
         ...state,
-        doors: state.doors.map(el => (el.id === door.id ? door : el)),
+        doors: state.doors.map(el => updateElementById(el, door)),
         doorsLoading: removeDoorFromLoading(state.doorsLoading, door.id)
       }
     }
     case OPEN_DOOR_FAILURE: {
+      const door = { ...action.door, failedToOpen: true }
       return {
         ...state,
+        doors: state.doors.map(el => updateElementById(el, door)),
         doorsLoading: removeDoorFromLoading(state.doorsLoading, action.door.id),
       }
     }
@@ -160,7 +166,7 @@ const doorsReducer = (state = initialState, action) => {
       const door = { ...action.door, open: false }
       return {
         ...state,
-        doors: state.doors.map(el => (el.id === door.id ? door : el)),
+        doors: state.doors.map(el => updateElementById(el, door)),
       }
     }
     case CREATE_SUCCESS_LOG:

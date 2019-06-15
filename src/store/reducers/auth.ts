@@ -26,7 +26,6 @@ export function login(username: string) {
   return dispatch => {
     getUser(username)
       .then(user => {
-        console.log('got user', user)
         dispatch(setUser(user))
         window.localStorage.setItem('UserAuth', JSON.stringify(user))
       })

@@ -31,7 +31,6 @@ const useStyles = makeStyles(
 
 export default function CustomInput({ placeholder, value, onChange, ...props }) {
   const classes = useStyles({})
-  console.log(value)
   return (
     <Paper className={classes.root}>
       <InputBase

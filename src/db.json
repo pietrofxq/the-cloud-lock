@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "0",
-      "username": "admin",
+      "username": "storage_user",
       "doors": [
         "0",
         "1"
@@ -14,15 +14,8 @@
         "0",
         "CtMVZOI"
       ],
-      "username": "front_door",
+      "username": "front_user",
       "id": "1"
-    },
-    {
-      "username": "pietro",
-      "doors": [
-        "1"
-      ],
-      "id": "5TN_5ID"
     }
   ],
   "doors": [
@@ -34,12 +27,7 @@
     {
       "id": "1",
       "name": "Front",
-      "open": true
-    },
-    {
-      "name": "nice_door",
-      "doors": [],
-      "id": "CtMVZOI"
+      "open": false
     }
   ]
 }

@@ -7,6 +7,16 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/styles'
 import { DangerSnackbar } from '../../../components/Snackbar'
 import {Card, DoorLabel, DoorSign, Shake, Triangle, SignContainer, ButtonContainer } from './styled'
+import doorUnlockedSound from './door_unlocked.mp3'
+import doorLockedSound from './door_locked.mp3'
+import { usePrevious } from '../../../utils';
+
+const audio = new Audio()
+
+const playSound = (url) => {
+  audio.src = url
+  audio.play()
+}
 
 const Spinner = () => {
   return <CircularProgress size={20} />
@@ -24,9 +34,13 @@ const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
   const isOpen = door.open
   const [animate, setAnimate] = useState(false)
   const [snackbarOpen, setSnackbar] = useState(false)
+  const wasOpen = usePrevious({ isOpen })
   useEffect(() => {
-    // Failed to open the door
+    if (!wasOpen.isOpen && isOpen) playSound(doorUnlockedSound)
+  }, [wasOpen, isOpen])
+  useEffect(() => {
     if (door.failedToOpen) {
+      playSound(doorLockedSound)
       setAnimate(true)
       setSnackbar(true)
     }

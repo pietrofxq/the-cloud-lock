@@ -10,22 +10,20 @@ const FixedTable = styled(Table)({
   tableLayout: 'fixed'
 })
 
-const CustomTable = ({renderRows, renderCells}) => {
+const CustomTable = ({renderRows, renderCells, className = ''}) => {
   return (
-    <div>
-      <Paper>
-        <FixedTable>
-          <TableHead>
-            <TableRow>
-              {renderCells()}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {renderRows()}
-          </TableBody>
-        </FixedTable>
-      </Paper>
-    </div>
+    <Paper>
+      <FixedTable className={className}>
+        <TableHead>
+          <TableRow>
+            {renderCells()}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {renderRows()}
+        </TableBody>
+      </FixedTable>
+    </Paper>
   );
 };
 

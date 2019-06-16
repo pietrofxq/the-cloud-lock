@@ -24,6 +24,21 @@ const useStyles = makeStyles({
   }
 })
 
+const useTableStyles = makeStyles({
+  table: {
+    '& thead, & tbody tr': {
+      display: 'table',
+      width: '100%',
+      tableLayout: 'fixed'
+    },
+    '& tbody': {
+      maxHeight: '440px',
+      overflowY: 'auto',
+      display: 'block'
+    }
+  },
+})
+
 const Log = ({ log }) => {
   const bg = { backgroundColor: log.type === 'opened' ? '#2ecc71' : '#e74c3c'}
   const classes = useStyles(bg)
@@ -37,11 +52,13 @@ const Log = ({ log }) => {
 }
 
 const Logs = ({ logs }) => {
+  const classes = useTableStyles({})
   return (
     <Container>
       <h2>History</h2>
       {logs.length === 0 ? <p>No actions done yet.</p> :
       <CustomTable 
+        className={classes.table}
         renderCells={() => (
           <>
             <TableCell>Status</TableCell>

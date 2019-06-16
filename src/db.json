@@ -27,7 +27,7 @@
     {
       "id": "1",
       "name": "Front",
-      "open": true
+      "open": false
     },
     {
       "name": "forbidden",

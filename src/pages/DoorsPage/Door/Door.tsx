@@ -9,6 +9,7 @@ import { DangerSnackbar } from '../../../components/Snackbar'
 import {Card, DoorLabel, DoorSign, Shake, Triangle, SignContainer, ButtonContainer } from './styled'
 import doorUnlockedSound from './door_unlocked.mp3'
 import doorLockedSound from './door_locked.mp3'
+import doorStuck from './door_stuck.mp3'
 import { usePrevious } from '../../../utils';
 
 const audio = new Audio()
@@ -37,10 +38,11 @@ const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
   const wasOpen = usePrevious({ isOpen })
   useEffect(() => {
     if (!wasOpen.isOpen && isOpen) playSound(doorUnlockedSound)
+    else if (wasOpen.isOpen && !isOpen) playSound(doorLockedSound)
   }, [wasOpen, isOpen])
   useEffect(() => {
     if (door.failedToOpen) {
-      playSound(doorLockedSound)
+      playSound(doorStuck)
       setAnimate(true)
       setSnackbar(true)
     }

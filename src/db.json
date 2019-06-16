@@ -4,15 +4,12 @@
       "id": "0",
       "username": "storage_user",
       "doors": [
-        "0",
-        "1"
+        "0"
       ]
     },
     {
       "doors": [
-        "1",
-        "0",
-        "CtMVZOI"
+        "1"
       ],
       "username": "front_user",
       "id": "1"
@@ -22,17 +19,12 @@
     {
       "id": "0",
       "name": "Storage",
-      "open": true
+      "open": false
     },
     {
       "id": "1",
       "name": "Front",
       "open": false
-    },
-    {
-      "name": "forbidden",
-      "doors": [],
-      "id": "m-Cb5dw"
     }
   ]
 }

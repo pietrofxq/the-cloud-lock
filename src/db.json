@@ -13,6 +13,19 @@
       ],
       "username": "front_user",
       "id": "1"
+    },
+    {
+      "username": "storage_front_user",
+      "id": "2",
+      "doors": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "username": "no_permissions",
+      "id": "3",
+      "doors": []
     }
   ],
   "doors": [

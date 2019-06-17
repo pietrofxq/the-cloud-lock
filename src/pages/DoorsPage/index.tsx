@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Door from './Door/Door'
 import styled from 'styled-components'
 import { loadDoors, selectDoors } from '../../store/reducers/doors'
 import { connect } from 'react-redux'
 import Logs from './Logs';
+import { CircularProgress } from '@material-ui/core';
 
 const Container = styled.div`
   display: flex;
@@ -29,12 +30,15 @@ const DoorContainer = styled.div`
 `
 
 const Doors = ({ doors, loadDoors }) => {
+  const [isLoading, setLoading] = useState(true)
   useEffect(() => {
-    loadDoors()
+    loadDoors().then(() => setLoading(false))
   }, [loadDoors])
   return (
     <div>
       <h1>Available doors</h1>
+      {isLoading ? <CircularProgress />
+      :
       <Container>
         <DoorContainer>
           {doors.map(door => (
@@ -42,7 +46,7 @@ const Doors = ({ doors, loadDoors }) => {
           ))}
         </DoorContainer>
         <Logs />
-      </Container>
+      </Container> }
     </div>
   )
 }

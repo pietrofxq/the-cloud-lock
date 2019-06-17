@@ -110,7 +110,7 @@ export const tryToOpenDoor = (door: Door, user: User) => {
 
 export const closeOpenDoor = (door: Door) => {
   return dispatch => {
-    closeDoor(door.id).then(() => {
+    return closeDoor(door.id).then(() => {
       dispatch(closeDoorRequest(door))
     })
   }
@@ -118,7 +118,7 @@ export const closeOpenDoor = (door: Door) => {
 
 export const createNewDoor = (name: string) => {
   return dispatch => {
-    createDoor(name).then(door => {
+    return createDoor(name).then(door => {
       dispatch(setDoor(door))
     })
   }
@@ -126,7 +126,7 @@ export const createNewDoor = (name: string) => {
 
 export const loadDoors = () => {
   return dispatch => {
-    getDoors().then(doors => {
+    return getDoors().then(doors => {
       dispatch(loadDoorsSuccess(doors))
     })
   }

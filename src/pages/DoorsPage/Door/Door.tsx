@@ -41,6 +41,7 @@ const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
     else if (wasOpen.isOpen && !isOpen) playSound(doorLockedSound)
   }, [wasOpen, isOpen])
   useEffect(() => {
+    console.log('failed?', door.failedToOpen)
     if (door.failedToOpen) {
       playSound(doorStuck)
       setAnimate(true)

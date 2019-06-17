@@ -34,6 +34,7 @@ export default function CustomInput({ placeholder, value, onChange, ...props }) 
   return (
     <Paper className={classes.root}>
       <InputBase
+        autoFocus
         className={classes.input}
         value={value}
         onChange={onChange}

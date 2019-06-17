@@ -17,7 +17,7 @@ const removeDoorFromLoading = (list, id) => list.filter(x => x !== id)
 
 const updateElementById = (el, newEl) => (el.id === newEl.id ? newEl : el)
 
-export const selectDoors = ({ doorsReducer }) => {
+export const selectDoors = ({ doors: doorsReducer }: DoorsState) => {
   const doors = doorsReducer.doors.map(door => ({
     ...door,
     isLoading: doorsReducer.doorsLoading.includes(door.id),

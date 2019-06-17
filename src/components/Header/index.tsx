@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../store/reducers/auth'
-import { AppState } from '../../store/reducers';
+import { AuthState } from '../../@types/authState';
 
 const HeaderStyled = styled.header`
   display: flex;
@@ -38,7 +38,7 @@ const HeaderStyled = styled.header`
     }
   }
 `
-const mapState = ({ auth: { user } }: AppState) => {
+const mapState = ({ auth: { user } }: AuthState) => {
   return {
     auth: user,
   }

@@ -77,6 +77,6 @@ const Logs = ({ logs }) => {
   );
 };
 
-const mapStateToProps = ({doorsReducer: { logs }}) => ({ logs })
+const mapStateToProps = ({doors: { logs }}: DoorsState) => ({ logs })
 
 export default connect(mapStateToProps)(Logs)

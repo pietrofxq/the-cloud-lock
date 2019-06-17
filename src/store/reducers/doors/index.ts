@@ -1,10 +1,5 @@
-import { createDoor, getDoors, canOpenDoor, closeDoor } from '../../api'
-
-type Log = {
-  type: 'accepted' | 'rejected',
-  user: User,
-  door: Door
-}
+import { createDoor, getDoors, canOpenDoor, closeDoor } from '../../../api'
+import * as Actions from './actions'
 
 type State = {
   doors: Door[]
@@ -18,16 +13,6 @@ const initialState: State = {
   logs: []
 }
 
-const LOAD_DOORS = 'clay/doors/LOAD_DOORS'
-const CREATE_DOOR = 'clay/doors/CREATE_DOOR'
-const CLOSE_DOOR = 'clay/doors/CLOSE_DOOR'
-const OPEN_DOOR_REQUEST = 'clay/doors/OPEN_DOOR_REQUEST'
-const OPEN_DOOR_SUCCESS = 'clay/doors/OPEN_DOOR_SUCCESS'
-const OPEN_DOOR_FAILURE = 'clay/doors/OPEN_DOOR_FAILURE'
-
-const CREATE_SUCCESS_LOG = 'clay/logs/CREATE_SUCCESS_LOG'
-const CREATE_FAILURE_LOG = 'clay/logs/CREATE_FAILURE_LOG'
-
 const removeDoorFromLoading = (list, id) => list.filter(x => x !== id)
 
 const updateElementById = (el, newEl) => (el.id === newEl.id ? newEl : el)
@@ -40,8 +25,8 @@ export const selectDoors = ({ doorsReducer }) => {
   return { doors }
 }
 
-const createSuccessLog = (door, user) => ({
-  type: CREATE_SUCCESS_LOG,
+const createSuccessLog = (door: Door, user: User): Actions.DoorActionType => ({
+  type: Actions.CREATE_SUCCESS_LOG,
   log: {
     type: 'opened',
     user,
@@ -49,8 +34,8 @@ const createSuccessLog = (door, user) => ({
   }
 })
 
-const createFailureLog = (door, user) => ({
-  type: CREATE_FAILURE_LOG,
+const createFailureLog = (door: Door, user: User): Actions.DoorActionType => ({
+  type: Actions.CREATE_FAILURE_LOG,
   log: {
     type: 'rejected',
     user,
@@ -58,33 +43,33 @@ const createFailureLog = (door, user) => ({
   }
 })
 
-const setDoor = (door: Door) => ({
-  type: CREATE_DOOR,
+const setDoor = (door: Door): Actions.DoorActionType => ({
+  type: Actions.CREATE_DOOR,
   door,
 })
 
-const loadDoorsSuccess = (doors: Door[]) => ({
-  type: LOAD_DOORS,
+const loadDoorsSuccess = (doors: Door[]): Actions.DoorActionType => ({
+  type: Actions.LOAD_DOORS,
   doors,
 })
 
-const openDoorRequest = (door: Door) => ({
-  type: OPEN_DOOR_REQUEST,
+const openDoorRequest = (door: Door): Actions.DoorActionType => ({
+  type: Actions.OPEN_DOOR_REQUEST,
   door,
 })
 
-const openDoorSuccess = (door: Door) => ({
-  type: OPEN_DOOR_SUCCESS,
+const openDoorSuccess = (door: Door): Actions.DoorActionType => ({
+  type: Actions.OPEN_DOOR_SUCCESS,
   door,
 })
 
-const openDoorFailure = (door: Door) => ({
-  type: OPEN_DOOR_FAILURE,
+const openDoorFailure = (door: Door): Actions.DoorActionType => ({
+  type: Actions.OPEN_DOOR_FAILURE,
   door,
 })
 
-const closeDoorRequest = (door: Door) => ({
-  type: CLOSE_DOOR,
+const closeDoorRequest = (door: Door): Actions.DoorActionType => ({
+  type: Actions.CLOSE_DOOR,
   door,
 })
 
@@ -132,13 +117,13 @@ export const loadDoors = () => {
   }
 }
 
-const doorsReducer = (state = initialState, action) => {
+const doorsReducer = (state = initialState, action: Partial<Actions.DoorActionType> = {}) => {
   switch (action.type) {
-    case CREATE_DOOR:
+    case Actions.CREATE_DOOR:
       return { ...state, doors: [...state.doors, action.door] }
-    case LOAD_DOORS:
+    case Actions.LOAD_DOORS:
       return { ...state, doors: action.doors }
-    case OPEN_DOOR_REQUEST: {
+    case Actions.OPEN_DOOR_REQUEST: {
       const door = {...action.door, failedToOpen: false}
       return {
         ...state,
@@ -146,7 +131,7 @@ const doorsReducer = (state = initialState, action) => {
         doorsLoading: [...state.doorsLoading, action.door.id],
       }
     }
-    case OPEN_DOOR_SUCCESS: {
+    case Actions.OPEN_DOOR_SUCCESS: {
       const door = { ...action.door, open: true, failedToOpen: false }
       return {
         ...state,
@@ -154,7 +139,7 @@ const doorsReducer = (state = initialState, action) => {
         doorsLoading: removeDoorFromLoading(state.doorsLoading, door.id)
       }
     }
-    case OPEN_DOOR_FAILURE: {
+    case Actions.OPEN_DOOR_FAILURE: {
       const door = { ...action.door, failedToOpen: true }
       return {
         ...state,
@@ -162,15 +147,15 @@ const doorsReducer = (state = initialState, action) => {
         doorsLoading: removeDoorFromLoading(state.doorsLoading, action.door.id),
       }
     }
-    case CLOSE_DOOR: {
+    case Actions.CLOSE_DOOR: {
       const door = { ...action.door, open: false }
       return {
         ...state,
         doors: state.doors.map(el => updateElementById(el, door)),
       }
     }
-    case CREATE_SUCCESS_LOG:
-    case CREATE_FAILURE_LOG: {
+    case Actions.CREATE_SUCCESS_LOG:
+    case Actions.CREATE_FAILURE_LOG: {
       return {
         ...state,
         logs: [action.log, ...state.logs]

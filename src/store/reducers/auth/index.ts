@@ -1,25 +1,22 @@
-import { getUser } from '../../api'
-
+import { getUser } from '../../../api'
+import * as Actions from './actions'
+import { AppState } from '..';
 const initialState = {
   user: null,
   loginError: ''
 }
 
-const LOGIN_SUCCESS = 'clay/auth/LOGIN_SUCCESS'
-const LOGOUT = 'clay/auth/LOGOUT'
-const LOGIN_FAILURE = 'clay/auth/LOGIN_FAILURE'
-
 export const setUser = (user: User) => ({
-  type: LOGIN_SUCCESS,
+  type: Actions.LOGIN_SUCCESS,
   user,
 })
 
 const failLoginRequest = () => ({
-  type: LOGIN_FAILURE
+  type: Actions.LOGIN_FAILURE
 })
 
 export const clearUser = () => ({
-  type: LOGOUT,
+  type: Actions.LOGOUT,
 })
 
 export function login(username: string) {
@@ -40,17 +37,17 @@ export function logout() {
   }
 }
 
-export default function(state = initialState, action) {
+export default function(state = initialState, action: any = {}) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case Actions.LOGIN_SUCCESS:
       return { user: action.user, loginError: '' }
-    case LOGIN_FAILURE:
+    case Actions.LOGIN_FAILURE:
       return { user: null, loginError: 'User does not exist'}
-    case LOGOUT:
+    case Actions.LOGOUT:
       return { ...state, user: null }
     default:
       return state
   }
 }
 
-export const selectCurrentUser = ({ authReducer: { user, loginError } }) => ({ user, loginError })
+export const selectCurrentUser = ({ auth: { user, loginError } }: AppState) => ({ user, loginError })

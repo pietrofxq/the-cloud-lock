@@ -4,6 +4,8 @@ import { login, selectCurrentUser, setUser } from '../store/reducers/auth'
 import { connect } from 'react-redux'
 import CustomInput from '../components/CustomInput'
 
+
+
 const Login = ({ user, loginError, login, setUser }) => {
   const [username, setUsername] = useState('')
   const auth = window.localStorage.getItem('UserAuth')
@@ -41,8 +43,8 @@ const Login = ({ user, loginError, login, setUser }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => login(user)(dispatch),
-    setUser: user => dispatch(setUser(user)),
+    login: (user: string) => login(user)(dispatch),
+    setUser: (user: User) => dispatch(setUser(user)),
   }
 }
 

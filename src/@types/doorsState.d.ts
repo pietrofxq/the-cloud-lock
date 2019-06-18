@@ -1,5 +1,7 @@
 interface DoorsState {
-  doors: Door[],
-  logs: Log[],
-  doorsLoading: string[]
+  doors: {
+    doors: Door[],
+    doorsLoading: string[],
+    logs: Log[]
+  }
 }

@@ -31,7 +31,7 @@ const CustomButton = withStyles(theme => ({
   },
 }))(Button)
 
-const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
+export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
   const isOpen = door.open
   const [animate, setAnimate] = useState(false)
   const [snackbarOpen, setSnackbar] = useState(false)
@@ -41,7 +41,6 @@ const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
     else if (wasOpen.isOpen && !isOpen) playSound(doorLockedSound)
   }, [wasOpen, isOpen])
   useEffect(() => {
-    console.log('failed?', door.failedToOpen)
     if (door.failedToOpen) {
       playSound(doorStuck)
       setAnimate(true)
@@ -58,8 +57,11 @@ const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
 
       <Card>
         <DoorLabel>{door.name}</DoorLabel>
-        <Shake className={animate ? 'shake' : ''} onAnimationEnd={() => setAnimate(false)}>
-          <SignContainer
+        <Shake 
+          data-testid='shake-container' 
+          className={animate ? 'shake' : ''} onAnimationEnd={() => setAnimate(false)}
+          >
+          <SignContainer data-testid='sign-container'
             className={`${isOpen ? '' : 'closed'}`}
           >
             <div className="box-inner">
@@ -77,12 +79,16 @@ const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
         </Shake>
         <ButtonContainer>
           <CustomButton
+            data-testid='door-button'
             variant="contained"
             onClick={() => {
               isOpen ? closeOpenDoor(door) : tryToOpenDoor(door, user)
             }}
           >
-            {door.isLoading ? <Spinner /> : isOpen ? 'Close door' : 'Open door'}
+            {door.isLoading ? 
+              <Spinner 
+                data-testid='door-spinner' /> : 
+                isOpen ? 'Close door' : 'Open door'}
           </CustomButton>
         </ButtonContainer>
       </Card>

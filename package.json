@@ -40,10 +40,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-select": "^2.0.19",
-    "@types/redux": "^3.6.0",
-    "@types/redux-thunk": "^2.1.0",
-    "@types/jest": "24.0.14",
+    "@testing-library/react": "^8.0.1",
+    "@types/jest": "^24.0.15",
     "@types/json-server": "^0.14.0",
     "@types/node": "12.0.8",
     "@types/prettier": "^1.16.4",
@@ -51,6 +49,10 @@
     "@types/react-dom": "16.8.4",
     "@types/react-redux": "^7.1.0",
     "@types/react-router-dom": "^4.3.3",
+    "@types/react-select": "^2.0.19",
+    "@types/redux": "^3.6.0",
+    "@types/redux-mock-store": "^1.0.1",
+    "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^4.1.16",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",

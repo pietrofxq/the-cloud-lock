@@ -6,6 +6,8 @@ This project uses create-react-app with a backend provided by json-server. [mate
 
 `npm start` will start the client application and the json server by using [concurrently](https://github.com/kimmobrunfeldt/concurrently).
 
+`npm test` to run tests.
+
 ## Application
 
 The application enables creation of users, doors, and setting permissions for users to open doors. It ships by default with 4 users:
@@ -22,3 +24,4 @@ All the application data is centralized in the file `db.json`. It's used by `jso
 For the sake of simplicity, the login page consists only of a username (provided above).
 
 The main page is where you can try to open doors and see the event log. There are pages for creating doors, creating users and setting permissions, accessible by the header.
+

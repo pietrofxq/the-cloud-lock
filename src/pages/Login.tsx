@@ -4,8 +4,6 @@ import { login, selectCurrentUser, setUser } from '../store/reducers/auth'
 import { connect } from 'react-redux'
 import CustomInput from '../components/CustomInput'
 
-
-
 const Login = ({ user, loginError, login, setUser }) => {
   const [username, setUsername] = useState('')
   const auth = window.localStorage.getItem('UserAuth')

@@ -6,15 +6,23 @@ import { selectCurrentUser } from '../../../store/reducers/auth'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/styles'
 import { DangerSnackbar } from '../../../components/Snackbar'
-import {Card, DoorLabel, DoorSign, Shake, Triangle, SignContainer, ButtonContainer } from './styled'
+import {
+  Card,
+  DoorLabel,
+  DoorSign,
+  Shake,
+  Triangle,
+  SignContainer,
+  ButtonContainer,
+} from './styled'
 import doorUnlockedSound from './door_unlocked.mp3'
 import doorLockedSound from './door_locked.mp3'
 import doorStuck from './door_stuck.mp3'
-import { usePrevious } from '../../../utils';
+import { usePrevious } from '../../../utils'
 
 const audio = new Audio()
 
-const playSound = (url) => {
+const playSound = url => {
   audio.src = url
   audio.play()
 }
@@ -57,13 +65,12 @@ export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
 
       <Card>
         <DoorLabel>{door.name}</DoorLabel>
-        <Shake 
-          data-testid='shake-container' 
-          className={animate ? 'shake' : ''} onAnimationEnd={() => setAnimate(false)}
-          >
-          <SignContainer data-testid='sign-container'
-            className={`${isOpen ? '' : 'closed'}`}
-          >
+        <Shake
+          data-testid="shake-container"
+          className={animate ? 'shake' : ''}
+          onAnimationEnd={() => setAnimate(false)}
+        >
+          <SignContainer data-testid="sign-container" className={`${isOpen ? '' : 'closed'}`}>
             <div className="box-inner">
               <div className="box-front">
                 <Triangle />
@@ -75,20 +82,23 @@ export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
               </div>
             </div>
           </SignContainer>
-          <img src={doorImage} alt='Door' width={200} />
+          <img src={doorImage} alt="Door" width={200} />
         </Shake>
         <ButtonContainer>
           <CustomButton
-            data-testid='door-button'
+            data-testid="door-button"
             variant="contained"
             onClick={() => {
               isOpen ? closeOpenDoor(door) : tryToOpenDoor(door, user)
             }}
           >
-            {door.isLoading ? 
-              <Spinner 
-                data-testid='door-spinner' /> : 
-                isOpen ? 'Close door' : 'Open door'}
+            {door.isLoading ? (
+              <Spinner data-testid="door-spinner" />
+            ) : isOpen ? (
+              'Close door'
+            ) : (
+              'Open door'
+            )}
           </CustomButton>
         </ButtonContainer>
       </Card>

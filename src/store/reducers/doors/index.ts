@@ -3,14 +3,14 @@ import * as Actions from './actions'
 
 type State = {
   doors: Door[]
-  doorsLoading: string[],
+  doorsLoading: string[]
   logs: Log[]
 }
 
 const initialState: State = {
   doors: [],
   doorsLoading: [],
-  logs: []
+  logs: [],
 }
 
 const removeDoorFromLoading = (list, id) => list.filter(x => x !== id)
@@ -30,8 +30,8 @@ const createSuccessLog = (door: Door, user: User): Actions.DoorActionType => ({
   log: {
     type: 'opened',
     user,
-    door
-  }
+    door,
+  },
 })
 
 const createFailureLog = (door: Door, user: User): Actions.DoorActionType => ({
@@ -39,8 +39,8 @@ const createFailureLog = (door: Door, user: User): Actions.DoorActionType => ({
   log: {
     type: 'rejected',
     user,
-    door
-  }
+    door,
+  },
 })
 
 const setDoor = (door: Door): Actions.DoorActionType => ({
@@ -84,7 +84,7 @@ export const tryToOpenDoor = (door: Door, user: User) => {
           dispatch(createSuccessLog(door, user))
         }, 500)
       })
-      .catch((err) => {
+      .catch(err => {
         setTimeout(() => {
           dispatch(openDoorFailure(door))
           dispatch(createFailureLog(door, user))
@@ -124,7 +124,7 @@ const doorsReducer = (state = initialState, action: Partial<Actions.DoorActionTy
     case Actions.LOAD_DOORS:
       return { ...state, doors: action.doors }
     case Actions.OPEN_DOOR_REQUEST: {
-      const door = {...action.door, failedToOpen: false}
+      const door = { ...action.door, failedToOpen: false }
       return {
         ...state,
         doors: state.doors.map(el => updateElementById(el, door)),
@@ -136,7 +136,7 @@ const doorsReducer = (state = initialState, action: Partial<Actions.DoorActionTy
       return {
         ...state,
         doors: state.doors.map(el => updateElementById(el, door)),
-        doorsLoading: removeDoorFromLoading(state.doorsLoading, door.id)
+        doorsLoading: removeDoorFromLoading(state.doorsLoading, door.id),
       }
     }
     case Actions.OPEN_DOOR_FAILURE: {
@@ -158,7 +158,7 @@ const doorsReducer = (state = initialState, action: Partial<Actions.DoorActionTy
     case Actions.CREATE_FAILURE_LOG: {
       return {
         ...state,
-        logs: [action.log, ...state.logs]
+        logs: [action.log, ...state.logs],
       }
     }
     default:

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../store/reducers/auth'
-import { AuthState } from '../../@types/authState';
+import { AuthState } from '../../@types/authState'
 
 const HeaderStyled = styled.header`
   display: flex;

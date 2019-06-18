@@ -3,7 +3,7 @@ import * as Actions from '../actions'
 
 const initialState = {
   user: null,
-  loginError: ''
+  loginError: '',
 }
 
 describe('store/auth/reducer', () => {
@@ -14,44 +14,50 @@ describe('store/auth/reducer', () => {
   it('should set user and empty error on LOGIN_SUCCESS', () => {
     const user = {
       id: 0,
-      username: 'user'
+      username: 'user',
     }
 
-    expect(authReducer(initialState, {
-      type: Actions.LOGIN_SUCCESS,
-      user
-    })).toEqual({
+    expect(
+      authReducer(initialState, {
+        type: Actions.LOGIN_SUCCESS,
+        user,
+      }),
+    ).toEqual({
       user: user,
-      loginError: ''
+      loginError: '',
     })
   })
 
   it('should set user to null and display error message on LOGIN_FAILURE', () => {
-    expect(authReducer(initialState, {
-      type: Actions.LOGIN_FAILURE
-    })).toEqual({
+    expect(
+      authReducer(initialState, {
+        type: Actions.LOGIN_FAILURE,
+      }),
+    ).toEqual({
       user: null,
-      loginError: 'User does not exist'
+      loginError: 'User does not exist',
     })
   })
 
   it('should remove user on LOGOUT', () => {
     const user = {
       id: 0,
-      username: 'user'
+      username: 'user',
     }
     const state = authReducer(initialState, {
       type: Actions.LOGIN_SUCCESS,
-      user
+      user,
     })
     expect(state).toMatchObject({
-      user
+      user,
     })
-    expect(authReducer(state, {
-      type: Actions.LOGOUT
-    })).toEqual({
+    expect(
+      authReducer(state, {
+        type: Actions.LOGOUT,
+      }),
+    ).toEqual({
       user: null,
-      loginError: ''
+      loginError: '',
     })
   })
 })

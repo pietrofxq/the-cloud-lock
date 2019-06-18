@@ -1,13 +1,13 @@
-import React from 'react';
-import CustomTable from '../../components/CustomTable';
-import { connect } from 'react-redux';
-import { TableRow, TableCell, makeStyles } from '@material-ui/core';
-import styled from 'styled-components';
+import React from 'react'
+import CustomTable from '../../components/CustomTable'
+import { connect } from 'react-redux'
+import { TableRow, TableCell, makeStyles } from '@material-ui/core'
+import styled from 'styled-components'
 
 const Container = styled.div`
   width: 480px;
 
-  @media(max-width: 1024px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `
@@ -16,12 +16,12 @@ const useStyles = makeStyles({
   root: {
     '& td': {
       color: 'white',
-      fontWeight: 600
-    }
+      fontWeight: 600,
+    },
   },
   bg: {
-    backgroundColor: (props: {backgroundColor: string}) => props.backgroundColor
-  }
+    backgroundColor: (props: { backgroundColor: string }) => props.backgroundColor,
+  },
 })
 
 const useTableStyles = makeStyles({
@@ -29,18 +29,18 @@ const useTableStyles = makeStyles({
     '& thead, & tbody tr': {
       display: 'table',
       width: '100%',
-      tableLayout: 'fixed'
+      tableLayout: 'fixed',
     },
     '& tbody': {
       maxHeight: '440px',
       overflowY: 'auto',
-      display: 'block'
-    }
+      display: 'block',
+    },
   },
 })
 
 const Log = ({ log }) => {
-  const bg = { backgroundColor: log.type === 'opened' ? '#2ecc71' : '#e74c3c'}
+  const bg = { backgroundColor: log.type === 'opened' ? '#2ecc71' : '#e74c3c' }
   const classes = useStyles(bg)
   return (
     <TableRow className={`${classes.root} ${classes.bg}`}>
@@ -56,27 +56,27 @@ const Logs = ({ logs }) => {
   return (
     <Container>
       <h2>History</h2>
-      {logs.length === 0 ? <p>No actions done yet.</p> :
-      <CustomTable 
-        className={classes.table}
-        renderCells={() => (
-          <>
-            <TableCell>Status</TableCell>
-            <TableCell>Door</TableCell>
-            <TableCell>User</TableCell>
-          </>
-        )}
-        renderRows={() => {
-          return logs.map((log, idx) => (
-            <Log log={log} key={idx} />
-          ))
-        }}
-      />
-    }
+      {logs.length === 0 ? (
+        <p>No actions done yet.</p>
+      ) : (
+        <CustomTable
+          className={classes.table}
+          renderCells={() => (
+            <>
+              <TableCell>Status</TableCell>
+              <TableCell>Door</TableCell>
+              <TableCell>User</TableCell>
+            </>
+          )}
+          renderRows={() => {
+            return logs.map((log, idx) => <Log log={log} key={idx} />)
+          }}
+        />
+      )}
     </Container>
-  );
-};
+  )
+}
 
-const mapStateToProps = ({doors: { logs }}: DoorsState) => ({ logs })
+const mapStateToProps = ({ doors: { logs } }: DoorsState) => ({ logs })
 
 export default connect(mapStateToProps)(Logs)

@@ -1,30 +1,26 @@
-import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { styled } from '@material-ui/core/styles';
+import React from 'react'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import { styled } from '@material-ui/core/styles'
 
 const FixedTable = styled(Table)({
-  tableLayout: 'fixed'
+  tableLayout: 'fixed',
 })
 
-const CustomTable = ({renderRows, renderCells, className = ''}) => {
+const CustomTable = ({ renderRows, renderCells, className = '' }) => {
   return (
     <Paper>
       <FixedTable className={className}>
         <TableHead>
-          <TableRow>
-            {renderCells()}
-          </TableRow>
+          <TableRow>{renderCells()}</TableRow>
         </TableHead>
-        <TableBody>
-          {renderRows()}
-        </TableBody>
+        <TableBody>{renderRows()}</TableBody>
       </FixedTable>
     </Paper>
-  );
-};
+  )
+}
 
-export default CustomTable;
+export default CustomTable

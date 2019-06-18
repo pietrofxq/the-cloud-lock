@@ -3,8 +3,8 @@ import Door from './Door/Door'
 import styled from 'styled-components'
 import { loadDoors, selectDoors } from '../../store/reducers/doors'
 import { connect } from 'react-redux'
-import Logs from './Logs';
-import { CircularProgress } from '@material-ui/core';
+import Logs from './Logs'
+import { CircularProgress } from '@material-ui/core'
 
 const Container = styled.div`
   display: flex;
@@ -37,16 +37,18 @@ const Doors = ({ doors, loadDoors }) => {
   return (
     <div>
       <h1>Available doors</h1>
-      {isLoading ? <CircularProgress />
-      :
-      <Container>
-        <DoorContainer>
-          {doors.map(door => (
-            <Door key={door.id} door={door} />
-          ))}
-        </DoorContainer>
-        <Logs />
-      </Container> }
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <Container>
+          <DoorContainer>
+            {doors.map(door => (
+              <Door key={door.id} door={door} />
+            ))}
+          </DoorContainer>
+          <Logs />
+        </Container>
+      )}
     </div>
   )
 }

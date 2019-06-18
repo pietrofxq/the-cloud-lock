@@ -1,9 +1,9 @@
 import { getUser } from '../../../api'
 import * as Actions from './actions'
-import { AppState } from '..';
+import { AppState } from '..'
 const initialState = {
   user: null,
-  loginError: ''
+  loginError: '',
 }
 
 export const setUser = (user: User) => ({
@@ -12,7 +12,7 @@ export const setUser = (user: User) => ({
 })
 
 const failLoginRequest = () => ({
-  type: Actions.LOGIN_FAILURE
+  type: Actions.LOGIN_FAILURE,
 })
 
 export const clearUser = () => ({
@@ -42,7 +42,7 @@ export default function(state = initialState, action: any = {}) {
     case Actions.LOGIN_SUCCESS:
       return { user: action.user, loginError: '' }
     case Actions.LOGIN_FAILURE:
-      return { user: null, loginError: 'User does not exist'}
+      return { user: null, loginError: 'User does not exist' }
     case Actions.LOGOUT:
       return { ...state, user: null }
     default:
@@ -50,4 +50,7 @@ export default function(state = initialState, action: any = {}) {
   }
 }
 
-export const selectCurrentUser = ({ auth: { user, loginError } }: AppState) => ({ user, loginError })
+export const selectCurrentUser = ({ auth: { user, loginError } }: AppState) => ({
+  user,
+  loginError,
+})

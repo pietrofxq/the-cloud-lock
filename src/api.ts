@@ -12,7 +12,7 @@ const getDoorsUserCanOpen = userId => {
   return instance.get(`/users/${userId}`).then(body => body.data.doors)
 }
 
-export const createDoor = (name: string) => {
+export const createDoor = (name: string): Promise<Door> => {
   return instance
     .post('/doors', {
       name,
@@ -28,15 +28,15 @@ export const assignDoorToUser = async (doorId, userId) => {
   })
 }
 
-const openDoor = (doorId) => {
+const openDoor = doorId => {
   return instance.patch(`/doors/${doorId}`, {
-    open: true
+    open: true,
   })
 }
 
-export const closeDoor = (doorId) => {
+export const closeDoor = doorId => {
   return instance.patch(`/doors/${doorId}`, {
-    open: false
+    open: false,
   })
 }
 
@@ -68,11 +68,10 @@ export const canOpenDoor = (doorId, userId) => {
 /* Users API */
 
 export const createUser = (username: string) => {
-  return instance
-    .post('/users', {
-      username,
-      doors: []
-    })
+  return instance.post('/users', {
+    username,
+    doors: [],
+  })
 }
 
 export const getUsers = (): Promise<User[]> => {

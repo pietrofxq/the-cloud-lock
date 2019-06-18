@@ -1,6 +1,6 @@
- interface Door {
+interface Door {
   id: string
   name: string
-  open: boolean,
+  open: boolean
   failedToOpen?: boolean
 }

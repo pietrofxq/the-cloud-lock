@@ -1,5 +1,5 @@
 interface Log {
-  type: 'opened' | 'rejected',
-  user: User,
+  type: 'opened' | 'rejected'
+  user: User
   door: Door
 }

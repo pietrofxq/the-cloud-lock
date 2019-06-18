@@ -1,6 +1,6 @@
 export interface AuthState {
   auth: {
-    user: User | null,
+    user: User | null
     loginError: string
   }
 }

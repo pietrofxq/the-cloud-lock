@@ -10,12 +10,12 @@ This project uses create-react-app with a backend provided by json-server. [mate
 
 The application enables creation of users, doors, and setting permissions for users to open doors. It ships by default with 4 users:
 
-`storage_user`: can access Storage door
-`front_user`: can access Front door
-`storage_front_user`: can access Storage and Front door
+`storage_user`: can access Storage door  
+`front_user`: can access Front door  
+`storage_front_user`: can access Storage and Front door  
 `no_permissions`: can't access a door
 
-## Using
+## Usage
 
 All the application data is centralized in the file `db.json`. It's used by `json-server` to generate automatically a REST API that operates on this file.
 

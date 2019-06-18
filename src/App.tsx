@@ -20,6 +20,15 @@ const Container = styled.div`
   padding: 0 50px;
 `
 
+const Footer = styled.footer`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #efefef;
+  padding: 15px;
+`
+
 const theme = createMuiTheme({
   palette: {
     primary: grey,
@@ -49,6 +58,7 @@ const App: React.FC = () => {
               }}
             />
           </Container>
+          <Footer>Created with <span role="img" aria-label="coffee">️☕</span> by <a href="http://github.com/pietrofxq">Pietro Coelho</a></Footer>
         </Provider>
       </Router>
     </ThemeProvider>

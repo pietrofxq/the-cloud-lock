@@ -27,6 +27,7 @@ const Footer = styled.footer`
   bottom: 0;
   background-color: #efefef;
   padding: 15px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 `
 
 const theme = createMuiTheme({

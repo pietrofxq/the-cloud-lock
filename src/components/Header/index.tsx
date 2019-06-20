@@ -38,18 +38,15 @@ const HeaderStyled = styled.header`
     }
   }
 `
-const mapState = ({ auth: { user } }: AuthState) => {
-  return {
-    auth: user,
-  }
-}
 
-const Header = ({ auth, logout }) => {
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
+
+const Header = ({ user, logout }: Props) => {
   return (
     <HeaderStyled>
       <img src={logo} alt="logo" width={70} />
       <ul>
-        {auth && (
+        {user && (
           <>
             <li>
               <NavLink to="/" exact activeClassName="active">
@@ -71,10 +68,10 @@ const Header = ({ auth, logout }) => {
                 Permissions
               </NavLink>
             </li>
-            <li onClick={() => logout()}>Logout</li>
+            <li onClick={() => logout()}>Logout ({user.username})</li>
           </>
         )}
-        {!auth && (
+        {!user && (
           <li>
             <NavLink to="/login">Login</NavLink>
           </li>
@@ -84,7 +81,15 @@ const Header = ({ auth, logout }) => {
   )
 }
 
+const mapStateToProps = ({ auth: { user } }: AuthState) => {
+  return {
+    user,
+  }
+}
+
+const mapDispatchToProps = { logout }
+
 export default connect(
-  mapState,
-  { logout },
+  mapStateToProps,
+  mapDispatchToProps,
 )(Header)

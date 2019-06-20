@@ -19,13 +19,18 @@
   "scripts": {
     "start": "npx concurrently \"react-scripts start\" \"yarn run start:server\" ",
     "start:server": "json-server ./src/db.json --port 4000",
-    "run:prettier": "npx prettier \"./src/**/*.{js,jsx,ts,tsx}\" --write",
+    "run:prettier": "npx prettier-eslint \"./src/**/*.{js,jsx,ts,tsx}\" --write",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn run run:prettier"
+    }
   },
   "browserslist": {
     "production": [
@@ -64,9 +69,12 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
+    "husky": "^2.4.1",
     "json-server": "^0.15.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
+    "prettier-eslint-cli": "^5.0.0",
+    "redux-mock-store": "^1.5.3",
     "typescript": "3.5.1"
   }
 }

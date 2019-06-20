@@ -1,7 +1,13 @@
 import { getUser } from '../../../api'
 import * as Actions from './actions'
 import { AppState } from '..'
-const initialState = {
+
+type State = {
+  user: User | null
+  loginError: string
+}
+
+const initialState: State = {
   user: null,
   loginError: '',
 }
@@ -37,7 +43,10 @@ export function logout() {
   }
 }
 
-export default function(state = initialState, action: any = {}) {
+function AuthReducer(
+  state = initialState,
+  action: Actions.AuthActionType = {} as Actions.AuthActionType,
+) {
   switch (action.type) {
     case Actions.LOGIN_SUCCESS:
       return { user: action.user, loginError: '' }
@@ -54,3 +63,5 @@ export const selectCurrentUser = ({ auth: { user, loginError } }: AppState) => (
   user,
   loginError,
 })
+
+export default AuthReducer

@@ -2,9 +2,9 @@ import { createDoor, getDoors, canOpenDoor, closeDoor } from '../../../api'
 import * as Actions from './actions'
 
 type State = {
-  doors: Door[]
-  doorsLoading: string[]
-  logs: Log[]
+  readonly doors: Door[]
+  readonly doorsLoading: string[]
+  readonly logs: Log[]
 }
 
 const initialState: State = {
@@ -84,7 +84,7 @@ export const tryToOpenDoor = (door: Door, user: User) => {
           dispatch(createSuccessLog(door, user))
         }, 500)
       })
-      .catch(err => {
+      .catch(() => {
         setTimeout(() => {
           dispatch(openDoorFailure(door))
           dispatch(createFailureLog(door, user))
@@ -117,7 +117,10 @@ export const loadDoors = () => {
   }
 }
 
-const doorsReducer = (state = initialState, action: Partial<Actions.DoorActionType> = {}) => {
+const doorsReducer = (
+  state = initialState,
+  action: Actions.DoorActionType = {} as Actions.DoorActionType,
+) => {
   switch (action.type) {
     case Actions.CREATE_DOOR:
       return { ...state, doors: [...state.doors, action.door] }

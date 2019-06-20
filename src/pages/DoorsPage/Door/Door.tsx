@@ -19,6 +19,7 @@ import doorImage from './door.png'
 import doorUnlockedSound from './door_unlocked.mp3'
 import doorLockedSound from './door_locked.mp3'
 import doorStuck from './door_stuck.mp3'
+import { bindActionCreators } from 'redux'
 
 const audio = new Audio()
 
@@ -31,7 +32,7 @@ const Spinner = () => {
   return <CircularProgress size={20} />
 }
 
-const CustomButton = withStyles(theme => ({
+const CustomButton = withStyles(() => ({
   root: {
     background: '#fff',
     width: '100%',
@@ -39,7 +40,12 @@ const CustomButton = withStyles(theme => ({
   },
 }))(Button)
 
-export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
+type Props = {
+  user: User
+  door: Door
+} & ReturnType<typeof mapDispatchToProps>
+
+export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }: Props) => {
   const isOpen = door.open
   const [animate, setAnimate] = useState(false)
   const [snackbarOpen, setSnackbar] = useState(false)
@@ -106,10 +112,16 @@ export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
   )
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      tryToOpenDoor,
+      closeOpenDoor,
+    },
+    dispatch,
+  )
+
 export default connect(
   selectCurrentUser,
-  {
-    tryToOpenDoor,
-    closeOpenDoor,
-  },
+  mapDispatchToProps,
 )(Door)

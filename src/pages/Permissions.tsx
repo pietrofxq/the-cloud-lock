@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import TableRow from '@material-ui/core/TableRow'
 import { getDoors } from '../api'
 
-const Permissions = ({ navigation }) => {
+const Permissions = () => {
   const [doors, setDoors] = useState([])
   useEffect(() => {
     getDoors().then(setDoors)

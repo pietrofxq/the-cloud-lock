@@ -3,4 +3,5 @@ interface Door {
   name: string
   open: boolean
   failedToOpen?: boolean
+  isLoading?: boolean
 }

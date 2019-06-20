@@ -1,5 +1,6 @@
 import { createDoor, getDoors, canOpenDoor, closeDoor } from '../../../api'
 import * as Actions from './actions'
+import { DoorActionType } from './actions'
 
 type State = {
   readonly doors: Door[]
@@ -25,7 +26,7 @@ export const selectDoors = ({ doors: doorsReducer }: DoorsState) => {
   return { doors }
 }
 
-const createSuccessLog = (door: Door, user: User): Actions.DoorActionType => ({
+const createSuccessLog = (door: Door, user: User): DoorActionType => ({
   type: Actions.CREATE_SUCCESS_LOG,
   log: {
     type: 'opened',
@@ -34,7 +35,7 @@ const createSuccessLog = (door: Door, user: User): Actions.DoorActionType => ({
   },
 })
 
-const createFailureLog = (door: Door, user: User): Actions.DoorActionType => ({
+const createFailureLog = (door: Door, user: User): DoorActionType => ({
   type: Actions.CREATE_FAILURE_LOG,
   log: {
     type: 'rejected',
@@ -43,32 +44,32 @@ const createFailureLog = (door: Door, user: User): Actions.DoorActionType => ({
   },
 })
 
-const setDoor = (door: Door): Actions.DoorActionType => ({
+const setDoor = (door: Door): DoorActionType => ({
   type: Actions.CREATE_DOOR,
   door,
 })
 
-const loadDoorsSuccess = (doors: Door[]): Actions.DoorActionType => ({
+const loadDoorsSuccess = (doors: Door[]): DoorActionType => ({
   type: Actions.LOAD_DOORS,
   doors,
 })
 
-const openDoorRequest = (door: Door): Actions.DoorActionType => ({
+const openDoorRequest = (door: Door): DoorActionType => ({
   type: Actions.OPEN_DOOR_REQUEST,
   door,
 })
 
-const openDoorSuccess = (door: Door): Actions.DoorActionType => ({
+const openDoorSuccess = (door: Door): DoorActionType => ({
   type: Actions.OPEN_DOOR_SUCCESS,
   door,
 })
 
-const openDoorFailure = (door: Door): Actions.DoorActionType => ({
+const openDoorFailure = (door: Door): DoorActionType => ({
   type: Actions.OPEN_DOOR_FAILURE,
   door,
 })
 
-const closeDoorRequest = (door: Door): Actions.DoorActionType => ({
+const closeDoorRequest = (door: Door): DoorActionType => ({
   type: Actions.CLOSE_DOOR,
   door,
 })
@@ -117,10 +118,7 @@ export const loadDoors = () => {
   }
 }
 
-const doorsReducer = (
-  state = initialState,
-  action: Actions.DoorActionType = {} as Actions.DoorActionType,
-) => {
+const doorsReducer = (state = initialState, action: DoorActionType = {} as DoorActionType) => {
   switch (action.type) {
     case Actions.CREATE_DOOR:
       return { ...state, doors: [...state.doors, action.door] }

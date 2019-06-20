@@ -1,6 +1,7 @@
 import { getUser } from '../../../api'
 import * as Actions from './actions'
 import { AppState } from '..'
+import { AuthActionType } from './actions'
 
 type State = {
   user: User | null
@@ -12,22 +13,22 @@ const initialState: State = {
   loginError: '',
 }
 
-export const setUser = (user: User) => ({
+export const setUser = (user: User): AuthActionType => ({
   type: Actions.LOGIN_SUCCESS,
   user,
 })
 
-const failLoginRequest = () => ({
+const failLoginRequest = (): AuthActionType => ({
   type: Actions.LOGIN_FAILURE,
 })
 
-export const clearUser = () => ({
+export const clearUser = (): AuthActionType => ({
   type: Actions.LOGOUT,
 })
 
 export function login(username: string) {
   return dispatch => {
-    getUser(username)
+    return getUser(username)
       .then(user => {
         dispatch(setUser(user))
         window.localStorage.setItem('UserAuth', JSON.stringify(user))
@@ -43,10 +44,7 @@ export function logout() {
   }
 }
 
-function AuthReducer(
-  state = initialState,
-  action: Actions.AuthActionType = {} as Actions.AuthActionType,
-) {
+function AuthReducer(state = initialState, action: AuthActionType = {} as AuthActionType) {
   switch (action.type) {
     case Actions.LOGIN_SUCCESS:
       return { user: action.user, loginError: '' }

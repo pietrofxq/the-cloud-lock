@@ -21,7 +21,7 @@ const setup = (props = {}, doorProps) => {
 
 afterEach(cleanup)
 
-describe('Doors component', () => {
+describe('Door component', () => {
   it('should display spinner if door is loading', () => {
     const { container } = setup({}, { isLoading: true })
     const spinner = container.querySelector('svg circle')

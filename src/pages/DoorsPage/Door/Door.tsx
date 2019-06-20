@@ -18,7 +18,6 @@ import doorImage from './door.png'
 import doorUnlockedSound from './door_unlocked.mp3'
 import doorLockedSound from './door_locked.mp3'
 import doorStuck from './door_stuck.mp3'
-import { bindActionCreators } from 'redux'
 
 const audio = new Audio()
 
@@ -110,14 +109,10 @@ export const Door = ({ door, tryToOpenDoor, closeOpenDoor }: Props) => {
   )
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      tryToOpenDoor,
-      closeOpenDoor,
-    },
-    dispatch,
-  )
+const mapDispatchToProps = () => ({
+  tryToOpenDoor,
+  closeOpenDoor,
+})
 
 export default connect(
   null,

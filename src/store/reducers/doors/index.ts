@@ -2,6 +2,7 @@ import { createDoor, getDoors, canOpenDoor, closeDoor } from '../../../api'
 import * as Actions from './actions'
 import { DoorActionType } from './actions'
 import { AppState } from '..'
+import { ThunkAction } from 'redux-thunk'
 
 type State = {
   readonly doors: Door[]
@@ -75,9 +76,11 @@ const closeDoorRequest = (door: Door): DoorActionType => ({
   door,
 })
 
-export const tryToOpenDoor = (door: Door) => {
+export const tryToOpenDoor = (
+  door: Door,
+): ThunkAction<ReturnType<typeof canOpenDoor>, AppState, {}, DoorActionType> => {
   // the setTimeouts here are just to show the loading spinners
-  return (dispatch, getState: () => AppState) => {
+  return (dispatch, getState) => {
     const {
       auth: { user },
     } = getState()

@@ -17,9 +17,10 @@
     "styled-components": "^4.3.1"
   },
   "scripts": {
-    "start": "npx concurrently \"react-scripts start\" \"yarn run start:server\" ",
+    "start": "concurrently \"react-scripts start\" \"yarn run start:server\" ",
     "start:server": "json-server ./src/db.json --port 4000",
-    "run:prettier": "npx prettier-eslint \"./src/**/*.{js,jsx,ts,tsx}\" --write",
+    "run:prettier": "prettier-eslint \"./src/**/*.{js,jsx,ts,tsx}\" --write",
+    "run:tsc": "tsc",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

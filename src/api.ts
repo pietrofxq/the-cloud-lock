@@ -55,7 +55,7 @@ export const getDoor = async doorId => {
   }
 }
 
-export const canOpenDoor = (doorId, userId) => {
+export const canOpenDoor = (doorId, userId): Promise<void> => {
   return new Promise(async (resolve, reject) => {
     const doors = await getDoorsUserCanOpen(userId)
     if (doors.indexOf(doorId) !== -1) {

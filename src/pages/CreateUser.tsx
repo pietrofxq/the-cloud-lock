@@ -5,8 +5,8 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { createUser, getUsers } from '../api'
 import CustomInput from '../components/CustomInput'
+import { createUser, getUsers } from '../api'
 
 const CreateUser = () => {
   const [name, setName] = useState('')

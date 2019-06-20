@@ -1,8 +1,8 @@
 import React from 'react'
-import CustomTable from '../../components/CustomTable'
 import { connect } from 'react-redux'
-import { TableRow, TableCell, makeStyles } from '@material-ui/core'
 import styled from 'styled-components'
+import { TableRow, TableCell, makeStyles } from '@material-ui/core'
+import CustomTable from '../../components/CustomTable'
 
 const Container = styled.div`
   width: 480px;

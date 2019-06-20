@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
+import styled from 'styled-components'
+import { Button } from '@material-ui/core'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
-import { getDoor, getUsersSuggestionsForDoor, assignDoorToUser } from '../api'
-import { Button } from '@material-ui/core'
 import CustomTable from '../components/CustomTable'
-import styled from 'styled-components'
+import { getDoor, getUsersSuggestionsForDoor, assignDoorToUser } from '../api'
 
 // little hack to make the button be placed nicely on side of the select
 const SelectContainer = styled.div`

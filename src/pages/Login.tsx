@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { login, selectCurrentUser, setUser } from '../store/reducers/auth'
 import { connect } from 'react-redux'
 import CustomInput from '../components/CustomInput'
+import { login, selectCurrentUser, setUser } from '../store/reducers/auth'
 
 const Login = ({ user, loginError, login, setUser }) => {
   const [username, setUsername] = useState('')

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Door from './Door/Door'
-import styled from 'styled-components'
-import { loadDoors, selectDoors } from '../../store/reducers/doors'
 import { connect } from 'react-redux'
-import Logs from './Logs'
+import styled from 'styled-components'
 import { CircularProgress } from '@material-ui/core'
+import Logs from './Logs'
+import Door from './Door/Door'
+import { loadDoors, selectDoors } from '../../store/reducers/doors'
 
 const Container = styled.div`
   display: flex;

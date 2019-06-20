@@ -1,8 +1,10 @@
 import React from 'react'
-import Header from './components/Header'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
-import './App.css'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { grey } from '@material-ui/core/colors'
+import { createMuiTheme } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/styles'
 import LoginPage from './pages/Login'
 import DoorsPage from './pages/DoorsPage'
 import CreateDoor from './pages/CreateDoor'
@@ -10,11 +12,9 @@ import CreateUser from './pages/CreateUser'
 import Permissions from './pages/Permissions'
 import DoorPermissions from './pages/DoorPermissions'
 import AuthenticatedRoute from './components/AuthenticatedRoute'
-import { Provider } from 'react-redux'
+import Header from './components/Header'
 import store from './store/store'
-import { createMuiTheme } from '@material-ui/core'
-import { grey } from '@material-ui/core/colors'
-import { ThemeProvider } from '@material-ui/styles'
+import './App.css'
 
 const Container = styled.div`
   padding: 0 50px;
@@ -39,8 +39,8 @@ const theme = createMuiTheme({
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Provider store={store}>
+      <Provider store={store}>
+        <Router>
           <Header />
           <Container>
             <AuthenticatedRoute exact path="/" component={DoorsPage} />
@@ -59,9 +59,15 @@ const App: React.FC = () => {
               }}
             />
           </Container>
-          <Footer>Created with <span role="img" aria-label="coffee">️☕</span> by <a href="http://github.com/pietrofxq">Pietro Coelho</a></Footer>
-        </Provider>
-      </Router>
+          <Footer>
+            Created with{' '}
+            <span role="img" aria-label="coffee">
+              ️☕
+            </span>{' '}
+            by <a href="http://github.com/pietrofxq">Pietro Coelho</a>
+          </Footer>
+        </Router>
+      </Provider>
     </ThemeProvider>
   )
 }

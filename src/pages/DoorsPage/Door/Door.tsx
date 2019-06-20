@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Button, CircularProgress } from '@material-ui/core'
-import { tryToOpenDoor, closeOpenDoor } from '../../../store/reducers/doors'
-import doorImage from './door.png'
-import { selectCurrentUser } from '../../../store/reducers/auth'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/styles'
 import { DangerSnackbar } from '../../../components/Snackbar'
+import { tryToOpenDoor, closeOpenDoor } from '../../../store/reducers/doors'
+import { selectCurrentUser } from '../../../store/reducers/auth'
 import {
   Card,
   DoorLabel,
@@ -15,10 +14,11 @@ import {
   SignContainer,
   ButtonContainer,
 } from './styled'
+import { usePrevious } from '../../../utils'
+import doorImage from './door.png'
 import doorUnlockedSound from './door_unlocked.mp3'
 import doorLockedSound from './door_locked.mp3'
 import doorStuck from './door_stuck.mp3'
-import { usePrevious } from '../../../utils'
 
 const audio = new Audio()
 
@@ -43,10 +43,10 @@ export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }) => {
   const isOpen = door.open
   const [animate, setAnimate] = useState(false)
   const [snackbarOpen, setSnackbar] = useState(false)
-  const wasOpen = usePrevious({ isOpen })
+  const { isOpen: wasOpen } = usePrevious({ isOpen })
   useEffect(() => {
-    if (!wasOpen.isOpen && isOpen) playSound(doorUnlockedSound)
-    else if (wasOpen.isOpen && !isOpen) playSound(doorLockedSound)
+    if (!wasOpen && isOpen) playSound(doorUnlockedSound)
+    else if (wasOpen && !isOpen) playSound(doorLockedSound)
   }, [wasOpen, isOpen])
   useEffect(() => {
     if (door.failedToOpen) {

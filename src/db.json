@@ -32,12 +32,17 @@
     {
       "id": "0",
       "name": "Storage",
-      "open": false
+      "open": true
     },
     {
       "id": "1",
       "name": "Front",
       "open": false
+    },
+    {
+      "name": "test",
+      "doors": [],
+      "id": "ykAn7r_"
     }
   ]
 }

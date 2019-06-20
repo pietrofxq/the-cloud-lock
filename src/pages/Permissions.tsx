@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { getDoors } from '../api'
+import { Link } from 'react-router-dom'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { Link } from 'react-router-dom'
+import TableRow from '@material-ui/core/TableRow'
+import { getDoors } from '../api'
 
 const Permissions = ({ navigation }) => {
   const [doors, setDoors] = useState([])

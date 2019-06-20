@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { createNewDoor, selectDoors } from '../store/reducers/doors'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { TableRow, TableCell, Button } from '@material-ui/core'
 import CustomInput from '../components/CustomInput'
 import CustomTable from '../components/CustomTable'
-import { TableRow, TableCell, Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { createNewDoor, selectDoors } from '../store/reducers/doors'
 
 const CreateDoor = ({ doors, createNewDoor }) => {
   const [name, setName] = useState('')

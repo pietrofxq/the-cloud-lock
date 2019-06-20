@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/styles'
 import { DangerSnackbar } from '../../../components/Snackbar'
 import { tryToOpenDoor, closeOpenDoor } from '../../../store/reducers/doors'
-import { selectCurrentUser } from '../../../store/reducers/auth'
 import {
   Card,
   DoorLabel,
@@ -41,11 +40,10 @@ const CustomButton = withStyles(() => ({
 }))(Button)
 
 type Props = {
-  user: User
   door: Door
 } & ReturnType<typeof mapDispatchToProps>
 
-export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }: Props) => {
+export const Door = ({ door, tryToOpenDoor, closeOpenDoor }: Props) => {
   const isOpen = door.open
   const [animate, setAnimate] = useState(false)
   const [snackbarOpen, setSnackbar] = useState(false)
@@ -95,7 +93,7 @@ export const Door = ({ user, door, tryToOpenDoor, closeOpenDoor }: Props) => {
             data-testid="door-button"
             variant="contained"
             onClick={() => {
-              isOpen ? closeOpenDoor(door) : tryToOpenDoor(door, user)
+              isOpen ? closeOpenDoor(door) : tryToOpenDoor(door)
             }}
           >
             {door.isLoading ? (
@@ -122,6 +120,6 @@ const mapDispatchToProps = dispatch =>
   )
 
 export default connect(
-  selectCurrentUser,
+  null,
   mapDispatchToProps,
 )(Door)

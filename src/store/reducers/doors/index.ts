@@ -1,6 +1,7 @@
 import { createDoor, getDoors, canOpenDoor, closeDoor } from '../../../api'
 import * as Actions from './actions'
 import { DoorActionType } from './actions'
+import { AppState } from '..'
 
 type State = {
   readonly doors: Door[]
@@ -74,9 +75,12 @@ const closeDoorRequest = (door: Door): DoorActionType => ({
   door,
 })
 
-export const tryToOpenDoor = (door: Door, user: User) => {
+export const tryToOpenDoor = (door: Door) => {
   // the setTimeouts here are just to show the loading spinners
-  return dispatch => {
+  return (dispatch, getState: () => AppState) => {
+    const {
+      auth: { user },
+    } = getState()
     dispatch(openDoorRequest(door))
     return canOpenDoor(door.id, user.id)
       .then(() => {

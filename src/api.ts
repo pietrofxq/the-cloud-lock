@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 const instance = axios.create({
   baseURL: 'http://localhost:4000',
 })
 
-const getData = body => body.data
+const getData = (body: AxiosResponse) => body.data
 
 /* Doors API */
 
